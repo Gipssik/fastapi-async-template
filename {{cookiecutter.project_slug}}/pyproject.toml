@@ -1,0 +1,60 @@
+[tool.poetry]
+name = "{{cookiecutter.project_slug}}"
+version = "{{cookiecutter.project_version}}"
+description = "{{cookiecutter.project_description}}"
+authors = ["{{cookiecutter.full_name}} <{{cookiecutter.email}}>"]
+
+[tool.isort]
+profile = "black"
+
+[tool.black]
+line-length = 88
+
+[tool.mypy]
+plugins = ["pydantic.mypy", "sqlmypy"]
+
+follow_imports = "silent"
+warn_redundant_casts = true
+warn_unused_ignores = true
+disallow_any_generics = true
+check_untyped_defs = true
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
+warn_untyped_fields = true
+
+[[tool.mypy.overrides]]
+module = [
+    "pytest.*",
+    "psycopg2.extras.*",
+    "asyncpg.*",
+    "sqlalchemy.future.*",
+    "sqlalchemy.ext.asyncio.*",
+    "tenacity.*"]
+ignore_missing_imports = true
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.75.0"
+uvicorn = "^0.17.6"
+alembic = "^1.7.7"
+SQLAlchemy = "^1.4.32"
+asyncpg = "^0.25.0"
+tenacity = "^8.0.1"
+psycopg2-binary = "^2.9.3"
+httpx = "^0.22.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.5"
+pre-commit = "^2.15.0"
+mypy = "^0.930"
+pytest-asyncio = "^0.18.0"
+sqlalchemy-stubs = "^0.4"
+pytest-cov = "^3.0.0"
+pytest-mock = "^3.7.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
