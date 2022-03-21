@@ -1,4 +1,6 @@
-FROM tiangolo/uvicorn-gunicorn-fastapi:python3.10
+FROM gipss/uvicorn-gunicorn-python3.10
+
+WORKDIR /app
 
 ENV PORT="8080"
 
