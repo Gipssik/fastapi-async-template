@@ -13,6 +13,8 @@ services:
     restart: always
     ports:
       - "8080:8080"
+    volumes:
+      - ./:/app
     depends_on:
       - db
     logging:
@@ -35,6 +37,8 @@ services:
       options:
         max-file: "10"
         max-size: "10m"
+    volumes:
+      - db-data:/var/lib/postgresql/data
 
   pgweb:
     image: sosedoff/pgweb
@@ -50,3 +54,6 @@ services:
       options:
         max-file: "10"
         max-size: "10m"
+
+volumes:
+  db-data:
